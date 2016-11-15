@@ -1,21 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package flippy;
+
+import javax.swing.ImageIcon;
 
 /**
  *
  * @author Maurice Ajluni
  */
-public class Frame extends javax.swing.JFrame {
-
+public class Frame extends javax.swing.JFrame
+{
     /**
      * Creates new form Frame
      */
-    public Frame() {
+    public Frame()
+    {
         initComponents();
+        this.setIconImage(new ImageIcon("src/quarter.png").getImage());
     }
 
     /**
@@ -28,7 +27,6 @@ public class Frame extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        input = new javax.swing.JPanel();
         settings = new javax.swing.JPanel();
         output = new javax.swing.JPanel();
 
@@ -36,34 +34,8 @@ public class Frame extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        input.setBorder(javax.swing.BorderFactory.createTitledBorder("Input"));
-        input.setPreferredSize(new java.awt.Dimension(350, 400));
-
-        javax.swing.GroupLayout inputLayout = new javax.swing.GroupLayout(input);
-        input.setLayout(inputLayout);
-        inputLayout.setHorizontalGroup(
-            inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 236, Short.MAX_VALUE)
-        );
-        inputLayout.setVerticalGroup(
-            inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 182, Short.MAX_VALUE)
-        );
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 5;
-        gridBagConstraints.ipady = 5;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        getContentPane().add(input, gridBagConstraints);
-
         settings.setBorder(javax.swing.BorderFactory.createTitledBorder("Settings"));
-        settings.setPreferredSize(new java.awt.Dimension(350, 400));
+        settings.setPreferredSize(new java.awt.Dimension(800, 400));
 
         javax.swing.GroupLayout settingsLayout = new javax.swing.GroupLayout(settings);
         settings.setLayout(settingsLayout);
@@ -77,7 +49,7 @@ public class Frame extends javax.swing.JFrame {
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -85,7 +57,7 @@ public class Frame extends javax.swing.JFrame {
         gridBagConstraints.ipady = 5;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 5);
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(settings, gridBagConstraints);
 
         output.setBorder(javax.swing.BorderFactory.createTitledBorder("Output"));
@@ -153,7 +125,6 @@ public class Frame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel input;
     private javax.swing.JPanel output;
     private javax.swing.JPanel settings;
     // End of variables declaration//GEN-END:variables
