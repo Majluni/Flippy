@@ -42,10 +42,12 @@ public class Frame extends javax.swing.JFrame
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         outputPanel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        output = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(325, 450));
+        setPreferredSize(new java.awt.Dimension(500, 500));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         settingsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Settings"));
@@ -153,37 +155,48 @@ public class Frame extends javax.swing.JFrame
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 5;
         gridBagConstraints.ipady = 5;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.weightx = 0.5;
+        gridBagConstraints.weighty = 0.5;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(settingsPanel, gridBagConstraints);
 
         outputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Output"));
-        outputPanel.setPreferredSize(new java.awt.Dimension(800, 200));
+        outputPanel.setPreferredSize(new java.awt.Dimension(800, 400));
+
+        output.setEditable(false);
+        output.setColumns(20);
+        output.setRows(5);
+        output.setText("Console ouput:");
+        jScrollPane2.setViewportView(output);
 
         javax.swing.GroupLayout outputPanelLayout = new javax.swing.GroupLayout(outputPanel);
         outputPanel.setLayout(outputPanelLayout);
         outputPanelLayout.setHorizontalGroup(
             outputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 591, Short.MAX_VALUE)
+            .addGroup(outputPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
+                .addContainerGap())
         );
         outputPanelLayout.setVerticalGroup(
             outputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 80, Short.MAX_VALUE)
+            .addGroup(outputPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 5;
         gridBagConstraints.ipady = 5;
-        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weightx = 0.5;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         getContentPane().add(outputPanel, gridBagConstraints);
@@ -192,22 +205,57 @@ public class Frame extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void player1InputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_player1InputActionPerformed
-        input1 = player1Input.getText().toLowerCase();
+        input1 = player1Input.getText();
+        
+        if(!isValidString(input1.toUpperCase()))
+        {
+            ready1 = false;
+            output.append("\n[ERROR]: \"" + input1 + "\" is not a valid entry!"
+                    + "\n\tMust only include \"H\" or \"T\".");
+        }
+        else
+        {
+            ready1 = true;
+            System.out.println(input1);
+        }
     }//GEN-LAST:event_player1InputActionPerformed
 
     private void player2InputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_player2InputActionPerformed
-        input2 = player2Input.getText().toLowerCase();
+        input2 = player2Input.getText();
+        
+        if(!isValidString(input2.toUpperCase()))
+        {
+            ready2 = false;
+            output.append("\n[ERROR]: \"" + input2 + "\" is not a valid entry!"
+                    + "\n\tMust only include \"H\" or \"T\".");
+        }
+        else
+        {
+            ready2 = true;
+            System.out.println(input2);
+        }
     }//GEN-LAST:event_player2InputActionPerformed
 
     private void numberInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberInputActionPerformed
-        
-        //if(numberInput.getText().)
-          //  num = Integer.parseInt(numberInput.getText());
+        if(!isValidInt(numberInput.getText()))
+        {
+            ready3 = false;
+            output.append("\n[ERROR]: \"" + numberInput.getText() + "\" is not a valid entry!"
+                    + "\n\tMust be an integer.");
+        }
+        else
+        {
+            ready3 = true;
+            num = Integer.parseInt(numberInput.getText());
+            System.out.println(num);
+        }
     }//GEN-LAST:event_numberInputActionPerformed
 
     private void simulateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simulateActionPerformed
-        //if(!isValidString(input1) || !isValidString(input2))
+        if(ready1 && ready2 && ready3)
+        {
             
+        }
     }//GEN-LAST:event_simulateActionPerformed
 
     public boolean isValidString(String choice)
@@ -236,7 +284,7 @@ public class Frame extends javax.swing.JFrame
             {
                 Integer.parseInt(num);
             }
-            catch(RuntimeException e)
+            catch(NumberFormatException e)
             {
                 result = false;
             }
@@ -280,14 +328,16 @@ public class Frame extends javax.swing.JFrame
         });
     }
 
-    private String input1;
-    private String input2;
+    private String input1, input2;
     private int num;
+    private boolean ready1, ready2, ready3;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField numberInput;
     private java.awt.Label numberLabel;
+    private javax.swing.JTextArea output;
     private javax.swing.JPanel outputPanel;
     private javax.swing.JTextField player1Input;
     private java.awt.Label player1Label;
