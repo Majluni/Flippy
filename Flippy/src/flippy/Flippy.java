@@ -8,29 +8,31 @@ package flippy;
  */
 public class Flippy
 {
-    private static String flips;
-    private static byte winner;
-    private static int patternLength;
+    private String flips, choice1, choice2;
+    private byte winner;
+    private int patternLength;
     
     /**
      * Default constructor set to private in order to make the class non
      * instantiatable.
      */
-    private Flippy()
+    public Flippy(String choice1, String choice2)
     {
-        flips = null;
+        this.choice1 = choice1;
+        this.choice2 = choice2;
+        flips = "";
         winner = 0;
     }
         
     /**
-     * This static method performs the necessary logic to simulate a single game
-     * of 'flippy'.
+     * This method performs the necessary logic to simulate a single game of
+     * 'flippy'.
      * 
      * @param choice1 Player1's combination of flips
      * @param choice2 Player2's combination of flips
      * @return winning player ('1' representing Player1, and '2' representing Player2
      */
-    public static byte run(String choice1, String choice2) throws InvalidEntryException
+    public byte run() throws InvalidEntryException
     {
         /*
          * Checks to see that both choice1 and choice2 only contain 'h' and 't'
@@ -76,6 +78,7 @@ public class Flippy
             }
         }
         while (cont);
+        flips = "";
         return winner;
     }
     
@@ -83,7 +86,7 @@ public class Flippy
      * Returns a String to represent the result of a coin flip
      * @return "H" or "T"
      */
-    private static String flipCoin()
+    private String flipCoin()
     {
         if(Math.random() < 0.5)
             return "H";
@@ -91,7 +94,7 @@ public class Flippy
             return "T";
     }
     
-    public static boolean isValid(String choice1, String choice2)
+    public boolean isValid(String choice1, String choice2)
     {
         boolean result = true;
         if (choice1.length() == choice2.length())

@@ -183,7 +183,7 @@ public class Frame extends javax.swing.JFrame
                 new Frame().setVisible(true);
                 if (jButton1.getModel().isPressed())
                 {
-                    Flippy f1 = new Flippy(jTextField1, jTextField2)
+                    Flippy f1 = new Flippy(jTextField1, jTextField2);
                     for (int i = 0; i < (int)jTextField4; i++)
                     {
                         f1.run();
