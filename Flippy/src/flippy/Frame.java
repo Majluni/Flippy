@@ -39,8 +39,6 @@ public class Frame extends javax.swing.JFrame
         progressBar = new javax.swing.JProgressBar();
         simulate = new javax.swing.JButton();
         player1Label = new java.awt.Label();
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         outputPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         output = new javax.swing.JTextArea();
@@ -51,7 +49,7 @@ public class Frame extends javax.swing.JFrame
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         settingsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Settings"));
-        settingsPanel.setPreferredSize(new java.awt.Dimension(800, 250));
+        settingsPanel.setPreferredSize(new java.awt.Dimension(800, 400));
         settingsPanel.setLayout(new java.awt.GridBagLayout());
 
         player2Label.setFont(new java.awt.Font("Dialog", 0, 17)); // NOI18N
@@ -149,8 +147,6 @@ public class Frame extends javax.swing.JFrame
         gridBagConstraints.weightx = 0.5;
         gridBagConstraints.weighty = 0.5;
         settingsPanel.add(player1Label, gridBagConstraints);
-        settingsPanel.add(filler1, new java.awt.GridBagConstraints());
-        settingsPanel.add(filler2, new java.awt.GridBagConstraints());
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -351,8 +347,6 @@ public class Frame extends javax.swing.JFrame
     private int num;
     private boolean ready1, ready2, ready3;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.Box.Filler filler1;
-    private javax.swing.Box.Filler filler2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField numberInput;
     private java.awt.Label numberLabel;
