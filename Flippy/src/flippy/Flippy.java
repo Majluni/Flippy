@@ -12,6 +12,7 @@ public class Flippy
     private final int NUM_OF_SIMULATIONS;
     private String flips;
     private byte winner;
+    private int player1WinCount, player2WinCount;
     
     
     /**
@@ -28,15 +29,15 @@ public class Flippy
         this.NUM_OF_SIMULATIONS = NUM_OF_SIMULATIONS;
         flips = "";
         winner = 0;
+        player1WinCount = 0;
+        player2WinCount = 0;
     }
         
     /**
-     * This method performs the necessary logic to simulate a single game of
+     * This method performs the necessary logic to simulate multiple games of
      * 'flippy'.
-     * 
-     * @return winning player ('1' representing Player1, and '2' representing Player2
      */
-    public byte run() throws InvalidEntryException
+    public void run() throws InvalidEntryException
     {
         //Checks to see that both CHOICE1 and CHOICE2 only contain 'h' and 't'
         for (int i = 0; i < NUM_OF_SIMULATIONS; i++)
@@ -56,18 +57,17 @@ public class Flippy
                 //Determines if one of the players has won and ends game loop
                 if(flips.substring(flips.length() - patternLength).equals(CHOICE1))
                 {
-                    winner = 1;
+                    player1WinCount++;
                     isEnd = true;
                 }
                 else if(flips.substring(flips.length() - patternLength).equals(CHOICE2))
                 {
-                    winner = 2;
+                    player2WinCount++;
                     isEnd = true;
                 }
             }
         }
         flips = "";
-        return winner;
     }
     
     /**
@@ -80,5 +80,32 @@ public class Flippy
             return "H";
         else
             return "T";
+    }
+    
+    /**
+     * Returns the number of times Player 1 has won
+     * @return number of times Player 1 won
+     */
+    public int getPlayer1WinCount()
+    {
+        return player1WinCount;
+    }
+    
+    /**
+     * Returns the number of times Player 2 has won
+     * @return number of times Player 2 won
+     */
+    public int getPlayer2WinCount()
+    {
+        return player2WinCount;
+    }
+    
+    @Override
+    public String toString()
+    {
+        return "Player 1's input was " + CHOICE1 + " and won "
+                + (player1WinCount / NUM_OF_SIMULATIONS) + "% of the time.\n"
+                + "Player 2's input was " + CHOICE2 + " and won "
+                + (player2WinCount / NUM_OF_SIMULATIONS) + "% of the time.";
     }
 }
