@@ -202,6 +202,7 @@ public class Frame extends javax.swing.JFrame
 
     private void player1InputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_player1InputActionPerformed
         input1 = player1Input.getText();
+        length = input1.length();
         
         if(!isValidString(input1.toUpperCase()))
         {
@@ -260,14 +261,19 @@ public class Frame extends javax.swing.JFrame
     }//GEN-LAST:event_numberInputActionPerformed
 
     private void simulateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simulateActionPerformed
-        if(ready1 && ready2 && ready3)
+        int length1 = input1.length();
+        int length2 = input2.length();
+        
+        if(ready1 && ready2 && ready3 && length1 == length2)
         {
             Flippy flippy = new Flippy(input1, input2, num);
             flippy.run();
             output.append("\n\n" + flippy.toString());
         }
+        else if(length1 != length2)
+            output.append("\n[ERROR]: Player inputs do not match in length!");
         else
-            output.append("\nSimulation is not ready! Check inputs.");
+            output.append("\n[ERROR]: Simulation is not ready! Check inputs.");
     }//GEN-LAST:event_simulateActionPerformed
 
     /**
@@ -344,7 +350,7 @@ public class Frame extends javax.swing.JFrame
     }
 
     private String input1, input2;
-    private int num;
+    private int num, length;
     private boolean ready1, ready2, ready3;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane2;
