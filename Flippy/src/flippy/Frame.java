@@ -18,6 +18,7 @@ public class Frame extends javax.swing.JFrame
     {
         initComponents();
         this.setIconImage(new ImageIcon("src/quarter.png").getImage());
+        simulate.setEnabled(false);
     }
 
     /**
@@ -210,13 +211,17 @@ public class Frame extends javax.swing.JFrame
         if(!isValidString(input1.toUpperCase()))
         {
             ready1 = false;
+            simulate.setEnabled(false);
             output.append("\n[ERROR]: \"" + input1 + "\" is not a valid entry!"
                     + "\n\tMust only include \"H\" or \"T\".");
         }
         else
         {
             ready1 = true;
-            System.out.println(input1);
+            output.append("\nPlayer 1's input is now \"" + input1.toUpperCase() + "\".");
+            
+            if(ready2 && ready3)
+                simulate.setEnabled(true);
         }
     }//GEN-LAST:event_player1InputActionPerformed
 
@@ -226,13 +231,17 @@ public class Frame extends javax.swing.JFrame
         if(!isValidString(input2.toUpperCase()))
         {
             ready2 = false;
+            simulate.setEnabled(false);
             output.append("\n[ERROR]: \"" + input2 + "\" is not a valid entry!"
                     + "\n\tMust only include \"H\" or \"T\".");
         }
         else
         {
             ready2 = true;
-            System.out.println(input2);
+            output.append("\nPlayer 2's input is now \"" + input2.toUpperCase() + "\".");
+            
+            if(ready1 && ready3)
+                simulate.setEnabled(true);
         }
     }//GEN-LAST:event_player2InputActionPerformed
 
@@ -240,6 +249,7 @@ public class Frame extends javax.swing.JFrame
         if(!isValidInt(numberInput.getText()))
         {
             ready3 = false;
+            simulate.setEnabled(false);
             output.append("\n[ERROR]: \"" + numberInput.getText() + "\" is not a valid entry!"
                     + "\n\tMust be an integer.");
         }
@@ -247,50 +257,63 @@ public class Frame extends javax.swing.JFrame
         {
             ready3 = true;
             num = Integer.parseInt(numberInput.getText());
-            System.out.println(num);
+            output.append("\nThe number of simulations to run is now \"" + num + "\".");
+            
+            if(ready1 && ready2)
+                simulate.setEnabled(true);
         }
     }//GEN-LAST:event_numberInputActionPerformed
 
     private void simulateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simulateActionPerformed
         if(ready1 && ready2 && ready3)
         {
-            
+            System.out.println("test1");
+            Flippy flippy = new Flippy(input1, input2, num);
+            System.out.println("test2");
+            flippy.run();
+            System.out.println("test3");
+            output.append("\n\n" + flippy.toString());
         }
+        else
+            output.append("\nSimulation is not ready! Check inputs.");
     }//GEN-LAST:event_simulateActionPerformed
 
+    /**
+     * @param choice
+     * @return whether or not the input String is a valid entry
+     */
     public boolean isValidString(String choice)
-    {
-        boolean result = true;
-        
-        choice = choice.toUpperCase();
+    {choice = choice.toUpperCase();
 
+        //if any char's in the String is not h or t returns false
         for(int i = 0; i < choice.length(); i++)
         {
             if(choice.charAt(i) != 'H' && choice.charAt(i) != 'T')
-                result = false;
+                return false;
         }
         
-        return result;
+        return true;
     }
     
+    /**
+     * @param num
+     * @return whether or not the input integer is a valid entry
+     */
     public boolean isValidInt(String num)
     {
-        System.out.println(num);
-        boolean result = true;
-        
         for(int i = 0; i < num.length(); i++)
         {
-            try
+            try //attempts to parse the String, if no numbers present returns false
             {
                 Integer.parseInt(num);
             }
             catch(NumberFormatException e)
             {
-                result = false;
+                return false;
             }
         }
         
-        return result;
+        return true;
     }
     
     /**
