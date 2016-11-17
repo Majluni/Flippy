@@ -100,6 +100,10 @@ public class Flippy
         return player2WinCount;
     }
     
+    /**
+     * Returns a string representation of the simulation.
+     * @return string representation of the simulation
+     */
     @Override
     public String toString()
     {
