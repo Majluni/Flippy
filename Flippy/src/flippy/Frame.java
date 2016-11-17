@@ -1,7 +1,6 @@
 package flippy;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 
 /**
  * User interface for Flippy simulations.
@@ -267,11 +266,8 @@ public class Frame extends javax.swing.JFrame
     private void simulateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simulateActionPerformed
         if(ready1 && ready2 && ready3)
         {
-            System.out.println("test1");
             Flippy flippy = new Flippy(input1, input2, num);
-            System.out.println("test2");
             flippy.run();
-            System.out.println("test3");
             output.append("\n\n" + flippy.toString());
         }
         else
