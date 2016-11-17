@@ -30,84 +30,125 @@ public class Frame extends javax.swing.JFrame
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jTextField3 = new javax.swing.JTextField();
-        settings = new javax.swing.JPanel();
-        label1 = new java.awt.Label();
-        label2 = new java.awt.Label();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        label3 = new java.awt.Label();
-        jTextField4 = new javax.swing.JTextField();
-        jProgressBar1 = new javax.swing.JProgressBar();
-        jButton1 = new javax.swing.JButton();
-        output = new javax.swing.JPanel();
+        settingsPanel = new javax.swing.JPanel();
+        player2Label = new java.awt.Label();
+        player1Input = new javax.swing.JTextField();
+        player2Input = new javax.swing.JTextField();
+        numberLabel = new java.awt.Label();
+        numberInput = new javax.swing.JTextField();
+        progressBar = new javax.swing.JProgressBar();
+        simulate = new javax.swing.JButton();
+        player1Label = new java.awt.Label();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        outputPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setPreferredSize(new java.awt.Dimension(325, 450));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        settings.setBorder(javax.swing.BorderFactory.createTitledBorder("Settings"));
-        settings.setPreferredSize(new java.awt.Dimension(800, 250));
+        settingsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Settings"));
+        settingsPanel.setPreferredSize(new java.awt.Dimension(800, 250));
+        settingsPanel.setLayout(new java.awt.GridBagLayout());
 
-        label1.setText("Player 1:");
+        player2Label.setFont(new java.awt.Font("Dialog", 0, 17)); // NOI18N
+        player2Label.setText("Player 2:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.weightx = 0.5;
+        gridBagConstraints.weighty = 0.5;
+        settingsPanel.add(player2Label, gridBagConstraints);
 
-        label2.setText("Player 2:");
+        player1Input.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                player1InputActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 80;
+        gridBagConstraints.weightx = 0.5;
+        gridBagConstraints.weighty = 0.5;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        settingsPanel.add(player1Input, gridBagConstraints);
 
-        label3.setText("Number of Simulations:");
+        player2Input.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                player2InputActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 80;
+        gridBagConstraints.weightx = 0.5;
+        gridBagConstraints.weighty = 0.5;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        settingsPanel.add(player2Input, gridBagConstraints);
 
-        jButton1.setText("Simulate...");
+        numberLabel.setFont(new java.awt.Font("Dialog", 0, 17)); // NOI18N
+        numberLabel.setText("Number of Simulations:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.weightx = 0.5;
+        gridBagConstraints.weighty = 0.5;
+        settingsPanel.add(numberLabel, gridBagConstraints);
 
-        javax.swing.GroupLayout settingsLayout = new javax.swing.GroupLayout(settings);
-        settings.setLayout(settingsLayout);
-        settingsLayout.setHorizontalGroup(
-            settingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(settingsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(settingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(settingsLayout.createSequentialGroup()
-                        .addGroup(settingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(settingsLayout.createSequentialGroup()
-                                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(settingsLayout.createSequentialGroup()
-                                .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(settingsLayout.createSequentialGroup()
-                                .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 5, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(settingsLayout.createSequentialGroup()
-                .addGap(87, 87, 87)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        settingsLayout.setVerticalGroup(
-            settingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(settingsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(settingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(settingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(settingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        numberInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numberInputActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 80;
+        gridBagConstraints.weightx = 0.5;
+        gridBagConstraints.weighty = 0.5;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        settingsPanel.add(numberInput, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 0.5;
+        gridBagConstraints.weighty = 0.5;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        settingsPanel.add(progressBar, gridBagConstraints);
+
+        simulate.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        simulate.setText("Simulate...");
+        simulate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simulateActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.weightx = 0.5;
+        gridBagConstraints.weighty = 0.5;
+        settingsPanel.add(simulate, gridBagConstraints);
+
+        player1Label.setFont(new java.awt.Font("Dialog", 0, 17)); // NOI18N
+        player1Label.setText("Player 1:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 0.5;
+        gridBagConstraints.weighty = 0.5;
+        settingsPanel.add(player1Label, gridBagConstraints);
+        settingsPanel.add(filler1, new java.awt.GridBagConstraints());
+        settingsPanel.add(filler2, new java.awt.GridBagConstraints());
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -119,20 +160,20 @@ public class Frame extends javax.swing.JFrame
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        getContentPane().add(settings, gridBagConstraints);
+        getContentPane().add(settingsPanel, gridBagConstraints);
 
-        output.setBorder(javax.swing.BorderFactory.createTitledBorder("Output"));
-        output.setPreferredSize(new java.awt.Dimension(800, 200));
+        outputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Output"));
+        outputPanel.setPreferredSize(new java.awt.Dimension(800, 200));
 
-        javax.swing.GroupLayout outputLayout = new javax.swing.GroupLayout(output);
-        output.setLayout(outputLayout);
-        outputLayout.setHorizontalGroup(
-            outputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 270, Short.MAX_VALUE)
+        javax.swing.GroupLayout outputPanelLayout = new javax.swing.GroupLayout(outputPanel);
+        outputPanel.setLayout(outputPanelLayout);
+        outputPanelLayout.setHorizontalGroup(
+            outputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 591, Short.MAX_VALUE)
         );
-        outputLayout.setVerticalGroup(
-            outputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 74, Short.MAX_VALUE)
+        outputPanelLayout.setVerticalGroup(
+            outputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 80, Short.MAX_VALUE)
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -145,11 +186,65 @@ public class Frame extends javax.swing.JFrame
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        getContentPane().add(output, gridBagConstraints);
+        getContentPane().add(outputPanel, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void player1InputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_player1InputActionPerformed
+        input1 = player1Input.getText().toLowerCase();
+    }//GEN-LAST:event_player1InputActionPerformed
+
+    private void player2InputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_player2InputActionPerformed
+        input2 = player2Input.getText().toLowerCase();
+    }//GEN-LAST:event_player2InputActionPerformed
+
+    private void numberInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberInputActionPerformed
+        
+        //if(numberInput.getText().)
+          //  num = Integer.parseInt(numberInput.getText());
+    }//GEN-LAST:event_numberInputActionPerformed
+
+    private void simulateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simulateActionPerformed
+        //if(!isValidString(input1) || !isValidString(input2))
+            
+    }//GEN-LAST:event_simulateActionPerformed
+
+    public boolean isValidString(String choice)
+    {
+        boolean result = true;
+        
+        choice = choice.toUpperCase();
+
+        for(int i = 0; i < choice.length(); i++)
+        {
+            if(choice.charAt(i) != 'H' && choice.charAt(i) != 'T')
+                result = false;
+        }
+        
+        return result;
+    }
+    
+    public boolean isValidInt(String num)
+    {
+        System.out.println(num);
+        boolean result = true;
+        
+        for(int i = 0; i < num.length(); i++)
+        {
+            try
+            {
+                Integer.parseInt(num);
+            }
+            catch(RuntimeException e)
+            {
+                result = false;
+            }
+        }
+        
+        return result;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -181,29 +276,25 @@ public class Frame extends javax.swing.JFrame
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Frame().setVisible(true);
-                if (jButton1.getModel().isPressed())
-                {
-                    Flippy f1 = new Flippy(jTextField1, jTextField2);
-                    for (int i = 0; i < (int)jTextField4; i++)
-                    {
-                        f1.run();
-                    }
-                }
             }
         });
     }
 
+    private String input1;
+    private String input2;
+    private int num;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private java.awt.Label label1;
-    private java.awt.Label label2;
-    private java.awt.Label label3;
-    private javax.swing.JPanel output;
-    private javax.swing.JPanel settings;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
+    private javax.swing.JTextField numberInput;
+    private java.awt.Label numberLabel;
+    private javax.swing.JPanel outputPanel;
+    private javax.swing.JTextField player1Input;
+    private java.awt.Label player1Label;
+    private javax.swing.JTextField player2Input;
+    private java.awt.Label player2Label;
+    private javax.swing.JProgressBar progressBar;
+    private javax.swing.JPanel settingsPanel;
+    private javax.swing.JButton simulate;
     // End of variables declaration//GEN-END:variables
 }
