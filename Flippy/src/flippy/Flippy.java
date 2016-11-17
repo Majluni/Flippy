@@ -8,18 +8,24 @@ package flippy;
  */
 public class Flippy
 {
-    private String flips, choice1, choice2;
+    private final String CHOICE1, CHOICE2;
+    private final int NUM_OF_SIMULATIONS;
+    private String flips;
     private byte winner;
-    private int patternLength;
+    
     
     /**
-     * Default constructor set to private in order to make the class non
-     * instantiatable.
+     * Constructor to set up a Flippy object.
+     * 
+     * @param CHOICE1 Player1's guess
+     * @param CHOICE2 Player2's guess
+     * @param NUM_OF_SIMULATIONS number of simulations to be run
      */
-    public Flippy(String choice1, String choice2)
+    public Flippy(String CHOICE1, String CHOICE2, int NUM_OF_SIMULATIONS)
     {
-        this.choice1 = choice1;
-        this.choice2 = choice2;
+        this.CHOICE1 = CHOICE1;
+        this.CHOICE2 = CHOICE2;
+        this.NUM_OF_SIMULATIONS = NUM_OF_SIMULATIONS;
         flips = "";
         winner = 0;
     }
@@ -28,56 +34,38 @@ public class Flippy
      * This method performs the necessary logic to simulate a single game of
      * 'flippy'.
      * 
-     * @param choice1 Player1's combination of flips
-     * @param choice2 Player2's combination of flips
      * @return winning player ('1' representing Player1, and '2' representing Player2
      */
     public byte run() throws InvalidEntryException
     {
-        /*
-         * Checks to see that both choice1 and choice2 only contain 'h' and 't'
-         * and that the length of both of those match patternLength.
-         */
-        boolean cont;
-        do
+        //Checks to see that both CHOICE1 and CHOICE2 only contain 'h' and 't'
+        for (int i = 0; i < NUM_OF_SIMULATIONS; i++)
         {
-            try
+            int patternLength = CHOICE1.length();
+
+            //Creates (patternLength - 1) coin flips to begin the game.
+            for(int j = 0; j < patternLength - 1; j++)
+                flips += flipCoin();
+
+            //Flips the coin and checks if either of the users choices is met
+            boolean isEnd = false;
+            while (!isEnd)
             {
-                if (!isValid(choice1, choice2))
-                    throw new InvalidEntryException();
+                flips += flipCoin();
 
-                patternLength = choice1.length();
-
-                //Creates (patternLength - 1) coin flips to begin the game.
-                for(int i = 0; i < patternLength - 1; i++)
-                    flips += flipCoin();
-
-                //Flips the coin and checks if either of the users choices is met
-                boolean isEnd = false;
-                while (!isEnd)
+                //Determines if one of the players has won and ends game loop
+                if(flips.substring(flips.length() - patternLength).equals(CHOICE1))
                 {
-                    flips += flipCoin();
-
-                    //Determines if one of the players has won and ends game loop
-                    if(flips.substring(flips.length() - patternLength).equals(choice1))
-                    {
-                        winner = 1;
-                        isEnd = true;
-                    }
-                    else if(flips.substring(flips.length() - patternLength).equals(choice2))
-                    {
-                        winner = 2;
-                        isEnd = true;
-                    }
+                    winner = 1;
+                    isEnd = true;
                 }
-                cont = false;
-            }
-            catch (InvalidEntryException e)
-            {
-                cont = true;
+                else if(flips.substring(flips.length() - patternLength).equals(CHOICE2))
+                {
+                    winner = 2;
+                    isEnd = true;
+                }
             }
         }
-        while (cont);
         flips = "";
         return winner;
     }
@@ -92,22 +80,5 @@ public class Flippy
             return "H";
         else
             return "T";
-    }
-    
-    public boolean isValid(String choice1, String choice2)
-    {
-        boolean result = true;
-        if (choice1.length() == choice2.length())
-        {
-            for (int i = 0; i < patternLength; i++)
-            {
-                if ((choice1.charAt(i) != 'h' || choice1.charAt(i) != 't') 
-                  &&(choice2.charAt(i) != 'h' || choice2.charAt(i) != 't'))
-                {
-                    result = false;
-                }
-            }
-        }
-        return result;
     }
 }
