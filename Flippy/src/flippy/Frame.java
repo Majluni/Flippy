@@ -1,6 +1,7 @@
 package flippy;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 /**
  * User interface for Flippy simulations.
@@ -178,6 +179,14 @@ public class Frame extends javax.swing.JFrame
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Frame().setVisible(true);
+                if (jButton1.getModel().isPressed())
+                {
+                    Flippy f1 = new Flippy(jTextField1, jTextField2)
+                    for (int i = 0; i < (int)jTextField4; i++)
+                    {
+                        f1.run();
+                    }
+                }
             }
         });
     }
