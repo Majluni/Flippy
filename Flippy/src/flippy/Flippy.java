@@ -11,7 +11,6 @@ public class Flippy
     private final String CHOICE1, CHOICE2;
     private final int NUM_OF_SIMULATIONS;
     private String flips;
-    private byte winner;
     private int player1WinCount, player2WinCount;
     
     
@@ -28,7 +27,6 @@ public class Flippy
         this.CHOICE2 = CHOICE2;
         this.NUM_OF_SIMULATIONS = NUM_OF_SIMULATIONS;
         flips = "";
-        winner = 0;
         player1WinCount = 0;
         player2WinCount = 0;
     }
