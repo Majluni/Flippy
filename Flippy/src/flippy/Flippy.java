@@ -109,10 +109,13 @@ public class Flippy
     {
         DecimalFormat df = new DecimalFormat("#.####");
         df.setRoundingMode(RoundingMode.CEILING);
-        return "Player 1's input was " + CHOICE1 + " and won "
+        
+        return "Player 1's input was \"" + CHOICE1 + "\".\n\t" 
+                + "They won " + player1WinCount + " times.\n\tThey won "
                 + df.format((((double)player1WinCount * 100) / NUM_OF_SIMULATIONS))
                 + "% of the time.\n"
-                + "Player 2's input was " + CHOICE2 + " and won "
+                + "Player 2's input was \"" + CHOICE2 + "\".\n\t"
+                + "They won " + player2WinCount + " times.\n\tThey won "
                 + df.format((((double)player2WinCount * 100) / NUM_OF_SIMULATIONS))
                 + "% of the time.";
     }
