@@ -10,7 +10,6 @@ public class Flippy
 {
     private final String CHOICE1, CHOICE2;
     private final int NUM_OF_SIMULATIONS;
-    private String flips;
     private int player1WinCount, player2WinCount;
     
     
@@ -26,7 +25,6 @@ public class Flippy
         this.CHOICE1 = CHOICE1;
         this.CHOICE2 = CHOICE2;
         this.NUM_OF_SIMULATIONS = NUM_OF_SIMULATIONS;
-        flips = "";
         player1WinCount = 0;
         player2WinCount = 0;
     }
@@ -40,6 +38,7 @@ public class Flippy
         //Checks to see that both CHOICE1 and CHOICE2 only contain 'h' and 't'
         for (int i = 0; i < NUM_OF_SIMULATIONS; i++)
         {
+            String flips = "";
             int patternLength = CHOICE1.length();
 
             //Creates (patternLength - 1) coin flips to begin the game.
@@ -65,7 +64,6 @@ public class Flippy
                 }
             }
         }
-        flips = "";
     }
     
     /**
