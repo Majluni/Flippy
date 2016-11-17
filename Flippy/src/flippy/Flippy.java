@@ -1,4 +1,8 @@
 package flippy;
+
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 /**
  * This class provides the necessary logic to simulate a single game of 'flippy'
  * with the two player choices and length of said choices being variable.
@@ -52,12 +56,12 @@ public class Flippy
                 flips += flipCoin();
 
                 //Determines if one of the players has won and ends game loop
-                if(flips.substring(flips.length() - patternLength).equals(CHOICE1))
+                if(flips.substring(flips.length() - patternLength).equalsIgnoreCase(CHOICE1))
                 {
                     player1WinCount++;
                     isEnd = true;
                 }
-                else if(flips.substring(flips.length() - patternLength).equals(CHOICE2))
+                else if(flips.substring(flips.length() - patternLength).equalsIgnoreCase(CHOICE2))
                 {
                     player2WinCount++;
                     isEnd = true;
@@ -103,9 +107,13 @@ public class Flippy
     @Override
     public String toString()
     {
+        DecimalFormat df = new DecimalFormat("#.####");
+        df.setRoundingMode(RoundingMode.CEILING);
         return "Player 1's input was " + CHOICE1 + " and won "
-                + (player1WinCount / NUM_OF_SIMULATIONS) + "% of the time.\n"
+                + df.format((((double)player1WinCount * 100) / NUM_OF_SIMULATIONS))
+                + "% of the time.\n"
                 + "Player 2's input was " + CHOICE2 + " and won "
-                + (player2WinCount / NUM_OF_SIMULATIONS) + "% of the time.";
+                + df.format((((double)player2WinCount * 100) / NUM_OF_SIMULATIONS))
+                + "% of the time.";
     }
 }
