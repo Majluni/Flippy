@@ -37,7 +37,7 @@ public class Flippy
      * This method performs the necessary logic to simulate multiple games of
      * 'flippy'.
      */
-    public void run() throws InvalidEntryException
+    public void run()
     {
         //Checks to see that both CHOICE1 and CHOICE2 only contain 'h' and 't'
         for (int i = 0; i < NUM_OF_SIMULATIONS; i++)
