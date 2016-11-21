@@ -13,7 +13,7 @@ import java.text.DecimalFormat;
 public class Flippy
 {
     private final String CHOICE1, CHOICE2;
-    private final int NUM_OF_SIMULATIONS;
+    private final int PATTERN_LENGTH, NUM_OF_SIMULATIONS;
     private int player1WinCount, player2WinCount;
     
     
@@ -29,6 +29,7 @@ public class Flippy
         this.CHOICE1 = CHOICE1;
         this.CHOICE2 = CHOICE2;
         this.NUM_OF_SIMULATIONS = NUM_OF_SIMULATIONS;
+        PATTERN_LENGTH = CHOICE1.length();
         player1WinCount = 0;
         player2WinCount = 0;
     }
@@ -43,10 +44,9 @@ public class Flippy
         for (int i = 0; i < NUM_OF_SIMULATIONS; i++)
         {
             String flips = "";
-            int patternLength = CHOICE1.length();
 
             //Creates (patternLength - 1) coin flips to begin the game.
-            for(int j = 0; j < patternLength - 1; j++)
+            for(int j = 0; j < PATTERN_LENGTH - 1; j++)
                 flips += flipCoin();
 
             //Flips the coin and checks if either of the users choices is met
@@ -56,16 +56,20 @@ public class Flippy
                 flips += flipCoin();
 
                 //Determines if one of the players has won and ends game loop
-                if(flips.substring(flips.length() - patternLength).equalsIgnoreCase(CHOICE1))
+                if(flips.substring(flips.length() - PATTERN_LENGTH).equalsIgnoreCase(CHOICE1))
                 {
                     player1WinCount++;
                     isEnd = true;
                 }
-                else if(flips.substring(flips.length() - patternLength).equalsIgnoreCase(CHOICE2))
+                else if(flips.substring(flips.length() - PATTERN_LENGTH).equalsIgnoreCase(CHOICE2))
                 {
                     player2WinCount++;
                     isEnd = true;
                 }
+                
+                //removes characters from 'flips' as they become unnecessary
+                if (flips.length() > PATTERN_LENGTH)
+                    flips = flips.substring(1);
             }
         }
     }
@@ -80,6 +84,59 @@ public class Flippy
             return "H";
         else
             return "T";
+    }
+    
+    /**
+     * Returns a String representation of the theoretical probability of Player1
+     * winning versus Player2 winning. This algorithm is based off one devised
+     * by John Conway.
+     * 
+     * @return String representation of the theoretical probabilities of the
+     * current game
+     */
+    public String getTheoretical()
+    {
+        String aa = "", ab = "", ba = "", bb = "", choice1Temp = CHOICE1;
+        for (int i = PATTERN_LENGTH - 1; i > 0; i--)
+        {
+            if (CHOICE1.substring(PATTERN_LENGTH - 1).equals(CHOICE1.substring(0, i)))
+                aa += "1";
+            else
+                aa += "0";
+            
+            if (CHOICE1.substring(PATTERN_LENGTH - 1).equals(CHOICE2.substring(0, i)))
+                ab += "1";
+            else
+                ab += "0";
+            
+            if (CHOICE2.substring(PATTERN_LENGTH - 1).equals(CHOICE1.substring(0, i)))
+                ba += "1";
+            else
+                ba += "0";
+            
+            if (CHOICE2.substring(PATTERN_LENGTH - 1).equals(CHOICE2.substring(0, i)))
+                bb += "1";
+            else
+                bb += "0";
+            
+            //remove first character of pattern found in CHOICE1
+            choice1Temp = choice1Temp.substring(1);
+        }
+        
+        
+        
+        //to be completed
+        return null;
+    }
+    
+    private int binaryToDecimal(String binaryNum)
+    {
+        int result = 0;
+        for (int i = 0; i < binaryNum.length(); i++)
+        {
+            result += (Math.pow(2, i)) * Integer.parseInt(binaryNum.charAt(i) + "");
+        }
+        return result;
     }
     
     /**
