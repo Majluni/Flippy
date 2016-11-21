@@ -96,37 +96,46 @@ public class Flippy
      */
     public String getTheoretical()
     {
-        String aa = "", ab = "", ba = "", bb = "", choice1Temp = CHOICE1;
-        for (int i = PATTERN_LENGTH - 1; i > 0; i--)
+        String aa = "", ab = "", ba = "", bb = "";
+        for (int i = PATTERN_LENGTH - 1; i >= 0; i--)
         {
-            if (CHOICE1.substring(PATTERN_LENGTH - 1).equals(CHOICE1.substring(0, i)))
+            if (CHOICE1.substring(PATTERN_LENGTH - i).equals(CHOICE1.substring(0, i)))
                 aa += "1";
             else
                 aa += "0";
             
-            if (CHOICE1.substring(PATTERN_LENGTH - 1).equals(CHOICE2.substring(0, i)))
+            if (CHOICE1.substring(PATTERN_LENGTH - i).equals(CHOICE2.substring(0, i)))
                 ab += "1";
             else
                 ab += "0";
             
-            if (CHOICE2.substring(PATTERN_LENGTH - 1).equals(CHOICE1.substring(0, i)))
+            if (CHOICE2.substring(PATTERN_LENGTH - i).equals(CHOICE1.substring(0, i)))
                 ba += "1";
             else
                 ba += "0";
             
-            if (CHOICE2.substring(PATTERN_LENGTH - 1).equals(CHOICE2.substring(0, i)))
+            if (CHOICE2.substring(PATTERN_LENGTH - i).equals(CHOICE2.substring(0, i)))
                 bb += "1";
             else
                 bb += "0";
-            
-            //remove first character of pattern found in CHOICE1
-            choice1Temp = choice1Temp.substring(1);
         }
         
+        int AA = binaryToDecimal(aa);
+        int AB = binaryToDecimal(ab);
+        int BA = binaryToDecimal(ba);
+        int BB = binaryToDecimal(bb);
         
+        int player1Odds = AA - AB;
+        int player2Odds = BB - BA;
+        int sampleSpace = player1Odds + player2Odds;
         
-        //to be completed
-        return null;
+        double player1Prob = ((double)player1Odds / (double)sampleSpace) * 100;
+        double player2Prob = ((double)player2Odds / (double)sampleSpace) * 100;
+        /*
+        return "Probability of Player 1 winning: " + player1Prob + "%\n"
+             + "Probability of Player 2 winning: " + player2Prob + "%\n";
+        */
+        return aa + "\n" + ab + "\n" + ba + "\n" + bb + "\n\n";
     }
     
     private int binaryToDecimal(String binaryNum)
