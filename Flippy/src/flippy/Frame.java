@@ -17,7 +17,6 @@ public class Frame extends javax.swing.JFrame
     {
         initComponents();
         this.setIconImage(new ImageIcon("src/quarter.png").getImage());
-        simulate.setEnabled(false);
     }
 
     /**
@@ -127,6 +126,7 @@ public class Frame extends javax.swing.JFrame
 
         simulate.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         simulate.setText("Simulate...");
+        simulate.setEnabled(false);
         simulate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 simulateActionPerformed(evt);
@@ -149,6 +149,7 @@ public class Frame extends javax.swing.JFrame
         settingsPanel.add(player1Label, gridBagConstraints);
 
         theoretical.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        theoretical.setEnabled(false);
         theoretical.setLabel("Find chances...");
         theoretical.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -233,6 +234,8 @@ public class Frame extends javax.swing.JFrame
             
             if(ready2 && ready3)
                 simulate.setEnabled(true);
+            if(ready2)
+                theoretical.setEnabled(true);
         }
     }//GEN-LAST:event_player1InputActionPerformed
 
@@ -253,6 +256,8 @@ public class Frame extends javax.swing.JFrame
             
             if(ready1 && ready3)
                 simulate.setEnabled(true);
+            if(ready1)
+                theoretical.setEnabled(true);
         }
     }//GEN-LAST:event_player2InputActionPerformed
 
