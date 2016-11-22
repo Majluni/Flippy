@@ -264,14 +264,17 @@ public class Frame extends javax.swing.JFrame
         int length1 = input1.length();
         int length2 = input2.length();
         
-        if(ready1 && ready2 && ready3 && length1 == length2)
+        if(ready1 && ready2 && ready3 && length1 == length2 && !input1.equalsIgnoreCase(input2))
         {
             Flippy flippy = new Flippy(input1, input2, num);
             flippy.run();
-            output.append("\n\n" + flippy.toString());
+            output.append("\n\n" + flippy.getTheoretical());
+            output.append("\n" + flippy.toString());
         }
-        else if(length1 != length2)
+        else if (length1 != length2)
             output.append("\n[ERROR]: Player inputs do not match in length!");
+        else if (input1.equalsIgnoreCase(input2))
+            output.append("\n[ERROR]: Player inputs cannot be the same!");
         else
             output.append("\n[ERROR]: Simulation is not ready! Check inputs.");
     }//GEN-LAST:event_simulateActionPerformed
