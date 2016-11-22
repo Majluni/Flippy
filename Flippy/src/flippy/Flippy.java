@@ -4,7 +4,7 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 /**
- * This class provides the necessary logic to simulate a single game of 'flippy'
+ * This class provides the necessary logic to simulate a game of 'flippy'
  * with the two player choices and length of said choices being variable.
  * 
  * @author Maurice Ajluni, Tanner Lisonbee
@@ -12,7 +12,7 @@ import java.text.DecimalFormat;
  */
 public class Flippy
 {
-    private final String CHOICE1, CHOICE2;
+    private final String KEY1, KEY2;
     private final int PATTERN_LENGTH, NUM_OF_SIMULATIONS;
     private int player1WinCount, player2WinCount;
     private DecimalFormat df;
@@ -21,16 +21,16 @@ public class Flippy
     /**
      * Constructor to set up a Flippy object.
      * 
-     * @param CHOICE1 Player1's guess
-     * @param CHOICE2 Player2's guess
+     * @param KEY1 Player1's guess
+     * @param KEY2 Player2's guess
      * @param NUM_OF_SIMULATIONS number of simulations to be run
      */
-    public Flippy(String CHOICE1, String CHOICE2, int NUM_OF_SIMULATIONS)
+    public Flippy(String KEY1, String KEY2, int NUM_OF_SIMULATIONS)
     {
-        this.CHOICE1 = CHOICE1;
-        this.CHOICE2 = CHOICE2;
+        this.KEY1 = KEY1;
+        this.KEY2 = KEY2;
         this.NUM_OF_SIMULATIONS = NUM_OF_SIMULATIONS;
-        PATTERN_LENGTH = CHOICE1.length();
+        PATTERN_LENGTH = KEY1.length();
         player1WinCount = 0;
         player2WinCount = 0;
         df = new DecimalFormat("#.####");
@@ -42,7 +42,7 @@ public class Flippy
      */
     public void run()
     {
-        //Checks to see that both CHOICE1 and CHOICE2 only contain 'h' and 't'
+        //Checks to see that both KEY1 and KEY2 only contain 'h' and 't'
         for (int i = 0; i < NUM_OF_SIMULATIONS; i++)
         {
             String flips = "";
@@ -58,12 +58,12 @@ public class Flippy
                 flips += flipCoin();
 
                 //Determines if one of the players has won and ends game loop
-                if(flips.substring(flips.length() - PATTERN_LENGTH).equalsIgnoreCase(CHOICE1))
+                if(flips.substring(flips.length() - PATTERN_LENGTH).equalsIgnoreCase(KEY1))
                 {
                     player1WinCount++;
                     isEnd = true;
                 }
-                else if(flips.substring(flips.length() - PATTERN_LENGTH).equalsIgnoreCase(CHOICE2))
+                else if(flips.substring(flips.length() - PATTERN_LENGTH).equalsIgnoreCase(KEY2))
                 {
                     player2WinCount++;
                     isEnd = true;
@@ -101,32 +101,34 @@ public class Flippy
         String aa = "", ab = "", ba = "", bb = "";
         for (int i = PATTERN_LENGTH - 1; i >= 0; i--)
         {
-            if (CHOICE1.substring((PATTERN_LENGTH - i) - 1).equals(CHOICE1.substring(0, i + 1)))
+            if (KEY1.substring((PATTERN_LENGTH - i) - 1).equals(KEY1.substring(0, i + 1)))
                 aa += "1";
             else
                 aa += "0";
             
-            if (CHOICE1.substring((PATTERN_LENGTH - i) - 1).equals(CHOICE2.substring(0, i + 1)))
+            if (KEY1.substring((PATTERN_LENGTH - i) - 1).equals(KEY2.substring(0, i + 1)))
                 ab += "1";
             else
                 ab += "0";
             
-            if (CHOICE2.substring((PATTERN_LENGTH - i) - 1).equals(CHOICE1.substring(0, i + 1)))
+            if (KEY2.substring((PATTERN_LENGTH - i) - 1).equals(KEY1.substring(0, i + 1)))
                 ba += "1";
             else
                 ba += "0";
             
-            if (CHOICE2.substring((PATTERN_LENGTH - i) - 1).equals(CHOICE2.substring(0, i + 1)))
+            if (KEY2.substring((PATTERN_LENGTH - i) - 1).equals(KEY2.substring(0, i + 1)))
                 bb += "1";
             else
                 bb += "0";
         }
         
+        //convert the String binary numbers to integers that are equivalent in base 10
         int AA = binaryToDecimal(aa);
         int AB = binaryToDecimal(ab);
         int BA = binaryToDecimal(ba);
         int BB = binaryToDecimal(bb);
         
+        //part of Conway's algorithm that calculates odds of either player winning.
         int player1Odds = BB - BA;
         int player2Odds = AA - AB;
         int sampleSpace = player1Odds + player2Odds;
@@ -181,11 +183,11 @@ public class Flippy
     public String toString()
     {
         df.setRoundingMode(RoundingMode.CEILING);
-        return "Player 1's input was \"" + CHOICE1 + "\".\n\t" 
+        return "Player 1's input was \"" + KEY1 + "\".\n\t" 
                 + "They won " + player1WinCount + " times.\n\tThey won "
                 + df.format((((double)player1WinCount * 100) / NUM_OF_SIMULATIONS))
                 + "% of the time.\n"
-                + "Player 2's input was \"" + CHOICE2 + "\".\n\t"
+                + "Player 2's input was \"" + KEY2 + "\".\n\t"
                 + "They won " + player2WinCount + " times.\n\tThey won "
                 + df.format((((double)player2WinCount * 100) / NUM_OF_SIMULATIONS))
                 + "% of the time.";
