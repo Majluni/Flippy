@@ -15,6 +15,7 @@ public class Flippy
     private final String CHOICE1, CHOICE2;
     private final int PATTERN_LENGTH, NUM_OF_SIMULATIONS;
     private int player1WinCount, player2WinCount;
+    private DecimalFormat df;
     
     
     /**
@@ -32,6 +33,7 @@ public class Flippy
         PATTERN_LENGTH = CHOICE1.length();
         player1WinCount = 0;
         player2WinCount = 0;
+        df = new DecimalFormat("#.####");
     }
         
     /**
@@ -129,13 +131,20 @@ public class Flippy
         int player2Odds = AA - AB;
         int sampleSpace = player1Odds + player2Odds;
         
-        double player1Prob = ((double)player1Odds / (double)sampleSpace) * 100;
-        double player2Prob = ((double)player2Odds / (double)sampleSpace) * 100;
+        String player1Prob = df.format(((double)player1Odds / (double)sampleSpace) * 100);
+        String player2Prob = df.format(((double)player2Odds / (double)sampleSpace) * 100);
         
         return "Probability of Player 1 winning: " + player1Prob + "%\n"
              + "Probability of Player 2 winning: " + player2Prob + "%\n";
     }
     
+    /**
+     * Converts a String representation of a binary number into its decimal
+     * counterpart.
+     * 
+     * @param binaryNum String representation of a binary number
+     * @return binary number converted to base 10
+     */
     private int binaryToDecimal(String binaryNum)
     {
         int result = 0;
@@ -171,9 +180,7 @@ public class Flippy
     @Override
     public String toString()
     {
-        DecimalFormat df = new DecimalFormat("#.####");
         df.setRoundingMode(RoundingMode.CEILING);
-        
         return "Player 1's input was \"" + CHOICE1 + "\".\n\t" 
                 + "They won " + player1WinCount + " times.\n\tThey won "
                 + df.format((((double)player1WinCount * 100) / NUM_OF_SIMULATIONS))
