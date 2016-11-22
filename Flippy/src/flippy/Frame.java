@@ -39,6 +39,7 @@ public class Frame extends javax.swing.JFrame
         progressBar = new javax.swing.JProgressBar();
         simulate = new javax.swing.JButton();
         player1Label = new java.awt.Label();
+        theoretical = new javax.swing.JButton();
         outputPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         output = new javax.swing.JTextArea();
@@ -134,7 +135,6 @@ public class Frame extends javax.swing.JFrame
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.weightx = 0.5;
         gridBagConstraints.weighty = 0.5;
         settingsPanel.add(simulate, gridBagConstraints);
@@ -147,6 +147,21 @@ public class Frame extends javax.swing.JFrame
         gridBagConstraints.weightx = 0.5;
         gridBagConstraints.weighty = 0.5;
         settingsPanel.add(player1Label, gridBagConstraints);
+
+        theoretical.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        theoretical.setLabel("Find chances...");
+        theoretical.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                theoreticalActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.weightx = 0.5;
+        gridBagConstraints.weighty = 0.5;
+        settingsPanel.add(theoretical, gridBagConstraints);
+        theoretical.getAccessibleContext().setAccessibleName("Find chances...");
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -181,7 +196,7 @@ public class Frame extends javax.swing.JFrame
             outputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(outputPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                .addComponent(jScrollPane2)
                 .addContainerGap())
         );
 
@@ -279,6 +294,21 @@ public class Frame extends javax.swing.JFrame
             output.append("\n[ERROR]: Simulation is not ready! Check inputs.");
     }//GEN-LAST:event_simulateActionPerformed
 
+    private void theoreticalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_theoreticalActionPerformed
+        int length1 = input1.length();
+        int length2 = input2.length();
+        
+        if(ready1 && ready2 && length1 == length2 && !input1.equalsIgnoreCase(input2))
+        {
+            Flippy flippy = new Flippy(input1, input2, 0);
+            output.append("\n" + flippy.getTheoretical());
+        }
+        else if (length1 != length2)
+            output.append("\n[ERROR]: Player inputs do not match in length!");
+        else
+            output.append("\n[ERROR]: Simulation is not ready! Check inputs.");
+    }//GEN-LAST:event_theoreticalActionPerformed
+
     /**
      * @param choice
      * @return whether or not the input String is a valid entry
@@ -368,5 +398,6 @@ public class Frame extends javax.swing.JFrame
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JPanel settingsPanel;
     private javax.swing.JButton simulate;
+    private javax.swing.JButton theoretical;
     // End of variables declaration//GEN-END:variables
 }
