@@ -1,6 +1,9 @@
 package flippy;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
+import javax.swing.Timer;
 
 /**
  * User interface for Flippy simulations.
@@ -17,6 +20,7 @@ public class Frame extends javax.swing.JFrame
     {
         initComponents();
         this.setIconImage(new ImageIcon("src/quarter.png").getImage());
+        this.setTitle("Flippy (AKA Penney Ante)");
     }
 
     /**
@@ -162,7 +166,6 @@ public class Frame extends javax.swing.JFrame
         gridBagConstraints.weightx = 0.5;
         gridBagConstraints.weighty = 0.5;
         settingsPanel.add(theoretical, gridBagConstraints);
-        theoretical.getAccessibleContext().setAccessibleName("Find chances...");
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -217,6 +220,7 @@ public class Frame extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void player1InputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_player1InputActionPerformed
+        progressBar.setValue(0);
         input1 = player1Input.getText();
         length = input1.length();
         
@@ -240,6 +244,7 @@ public class Frame extends javax.swing.JFrame
     }//GEN-LAST:event_player1InputActionPerformed
 
     private void player2InputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_player2InputActionPerformed
+        progressBar.setValue(0);
         input2 = player2Input.getText();
         
         if(!isValidString(input2.toUpperCase()))
@@ -262,6 +267,7 @@ public class Frame extends javax.swing.JFrame
     }//GEN-LAST:event_player2InputActionPerformed
 
     private void numberInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberInputActionPerformed
+        progressBar.setValue(0);
         if(!isValidInt(numberInput.getText()))
         {
             ready3 = false;
@@ -286,8 +292,10 @@ public class Frame extends javax.swing.JFrame
         
         if(ready1 && ready2 && ready3 && length1 == length2 && !input1.equalsIgnoreCase(input2))
         {
+            progressBar.setValue(0);
             Flippy flippy = new Flippy(input1, input2, num);
             flippy.run();
+            progressBar.setValue(100);
             output.append("\n" + flippy.toString());
         }
         else if (length1 != length2)
@@ -299,6 +307,7 @@ public class Frame extends javax.swing.JFrame
     }//GEN-LAST:event_simulateActionPerformed
 
     private void theoreticalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_theoreticalActionPerformed
+        progressBar.setValue(0);
         int length1 = input1.length();
         int length2 = input2.length();
         
@@ -385,7 +394,7 @@ public class Frame extends javax.swing.JFrame
             }
         });
     }
-
+    
     private String input1, input2;
     private int num, length;
     private boolean ready1, ready2, ready3;
