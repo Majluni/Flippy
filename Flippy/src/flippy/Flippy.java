@@ -134,8 +134,8 @@ public class Flippy
         String player1Prob = df.format(((double)player1Odds / (double)sampleSpace) * 100);
         String player2Prob = df.format(((double)player2Odds / (double)sampleSpace) * 100);
         
-        return "Probability of Player 1 winning: " + player1Prob + "%\n"
-             + "Probability of Player 2 winning: " + player2Prob + "%\n";
+        return "\nProbability of Player 1 winning: " + player1Prob + "%\n"
+               + "Probability of Player 2 winning: " + player2Prob + "%\n";
     }
     
     /**
