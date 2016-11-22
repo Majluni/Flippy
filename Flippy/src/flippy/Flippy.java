@@ -99,22 +99,22 @@ public class Flippy
         String aa = "", ab = "", ba = "", bb = "";
         for (int i = PATTERN_LENGTH - 1; i >= 0; i--)
         {
-            if (CHOICE1.substring(PATTERN_LENGTH - i).equals(CHOICE1.substring(0, i)))
+            if (CHOICE1.substring((PATTERN_LENGTH - i) - 1).equals(CHOICE1.substring(0, i + 1)))
                 aa += "1";
             else
                 aa += "0";
             
-            if (CHOICE1.substring(PATTERN_LENGTH - i).equals(CHOICE2.substring(0, i)))
+            if (CHOICE1.substring((PATTERN_LENGTH - i) - 1).equals(CHOICE2.substring(0, i + 1)))
                 ab += "1";
             else
                 ab += "0";
             
-            if (CHOICE2.substring(PATTERN_LENGTH - i).equals(CHOICE1.substring(0, i)))
+            if (CHOICE2.substring((PATTERN_LENGTH - i) - 1).equals(CHOICE1.substring(0, i + 1)))
                 ba += "1";
             else
                 ba += "0";
             
-            if (CHOICE2.substring(PATTERN_LENGTH - i).equals(CHOICE2.substring(0, i)))
+            if (CHOICE2.substring((PATTERN_LENGTH - i) - 1).equals(CHOICE2.substring(0, i + 1)))
                 bb += "1";
             else
                 bb += "0";
@@ -125,17 +125,15 @@ public class Flippy
         int BA = binaryToDecimal(ba);
         int BB = binaryToDecimal(bb);
         
-        int player1Odds = AA - AB;
-        int player2Odds = BB - BA;
+        int player1Odds = BB - BA;
+        int player2Odds = AA - AB;
         int sampleSpace = player1Odds + player2Odds;
         
         double player1Prob = ((double)player1Odds / (double)sampleSpace) * 100;
         double player2Prob = ((double)player2Odds / (double)sampleSpace) * 100;
-        /*
+        
         return "Probability of Player 1 winning: " + player1Prob + "%\n"
              + "Probability of Player 2 winning: " + player2Prob + "%\n";
-        */
-        return aa + "\n" + ab + "\n" + ba + "\n" + bb + "\n\n";
     }
     
     private int binaryToDecimal(String binaryNum)
@@ -143,7 +141,7 @@ public class Flippy
         int result = 0;
         for (int i = 0; i < binaryNum.length(); i++)
         {
-            result += (Math.pow(2, i)) * Integer.parseInt(binaryNum.charAt(i) + "");
+            result += (Math.pow(2, i)) * Integer.parseInt(binaryNum.charAt(binaryNum.length() - i - 1) + "");
         }
         return result;
     }
