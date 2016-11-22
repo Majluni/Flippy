@@ -283,7 +283,6 @@ public class Frame extends javax.swing.JFrame
         {
             Flippy flippy = new Flippy(input1, input2, num);
             flippy.run();
-            output.append("\n\n" + flippy.getTheoretical());
             output.append("\n" + flippy.toString());
         }
         else if (length1 != length2)
