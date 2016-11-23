@@ -1,9 +1,6 @@
 package flippy;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
-import javax.swing.Timer;
 
 /**
  * User interface for Flippy simulations.
@@ -153,8 +150,8 @@ public class Frame extends javax.swing.JFrame
         settingsPanel.add(player1Label, gridBagConstraints);
 
         theoretical.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        theoretical.setText("Find Chances...");
         theoretical.setEnabled(false);
-        theoretical.setLabel("Find chances...");
         theoretical.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 theoreticalActionPerformed(evt);
@@ -245,6 +242,7 @@ public class Frame extends javax.swing.JFrame
 
     private void player2InputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_player2InputActionPerformed
         progressBar.setValue(0);
+        
         input2 = player2Input.getText();
         
         if(!isValidString(input2.toUpperCase()))
