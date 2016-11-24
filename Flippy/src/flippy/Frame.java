@@ -36,7 +36,6 @@ public class Frame extends javax.swing.JFrame
         player2Input = new javax.swing.JTextField();
         numberLabel = new java.awt.Label();
         numberInput = new javax.swing.JTextField();
-        progressBar = new javax.swing.JProgressBar();
         simulate = new javax.swing.JButton();
         player1Label = new java.awt.Label();
         theoretical = new javax.swing.JButton();
@@ -115,15 +114,6 @@ public class Frame extends javax.swing.JFrame
         gridBagConstraints.weighty = 0.5;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         settingsPanel.add(numberInput, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 0.5;
-        gridBagConstraints.weighty = 0.5;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        settingsPanel.add(progressBar, gridBagConstraints);
 
         simulate.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         simulate.setText("Simulate...");
@@ -217,7 +207,6 @@ public class Frame extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void player1InputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_player1InputActionPerformed
-        progressBar.setValue(0);
         input1 = player1Input.getText();
         length = input1.length();
         
@@ -241,8 +230,6 @@ public class Frame extends javax.swing.JFrame
     }//GEN-LAST:event_player1InputActionPerformed
 
     private void player2InputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_player2InputActionPerformed
-        progressBar.setValue(0);
-        
         input2 = player2Input.getText();
         
         if(!isValidString(input2.toUpperCase()))
@@ -265,7 +252,6 @@ public class Frame extends javax.swing.JFrame
     }//GEN-LAST:event_player2InputActionPerformed
 
     private void numberInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numberInputActionPerformed
-        progressBar.setValue(0);
         if(!isValidInt(numberInput.getText()))
         {
             ready3 = false;
@@ -290,10 +276,8 @@ public class Frame extends javax.swing.JFrame
         
         if(ready1 && ready2 && ready3 && length1 == length2 && !input1.equalsIgnoreCase(input2))
         {
-            progressBar.setValue(0);
             Flippy flippy = new Flippy(input1, input2, num);
             flippy.run();
-            progressBar.setValue(100);
             output.append("\n" + flippy.toString());
         }
         else if (length1 != length2)
@@ -305,7 +289,6 @@ public class Frame extends javax.swing.JFrame
     }//GEN-LAST:event_simulateActionPerformed
 
     private void theoreticalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_theoreticalActionPerformed
-        progressBar.setValue(0);
         int length1 = input1.length();
         int length2 = input2.length();
         
@@ -406,7 +389,6 @@ public class Frame extends javax.swing.JFrame
     private java.awt.Label player1Label;
     private javax.swing.JTextField player2Input;
     private java.awt.Label player2Label;
-    private javax.swing.JProgressBar progressBar;
     private javax.swing.JPanel settingsPanel;
     private javax.swing.JButton simulate;
     private javax.swing.JButton theoretical;
