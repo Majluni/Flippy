@@ -257,7 +257,7 @@ public class Frame extends javax.swing.JFrame
             ready3 = false;
             simulate.setEnabled(false);
             output.append("\n[ERROR]: \"" + numberInput.getText() + "\" is not a valid entry!"
-                    + "\n\tMust be an integer.");
+                    + "\n\tMust be an integer greater than zero.");
         }
         else
         {
@@ -308,7 +308,8 @@ public class Frame extends javax.swing.JFrame
      * @return whether or not the input String is a valid entry
      */
     public boolean isValidString(String choice)
-    {choice = choice.toUpperCase();
+    {
+        choice = choice.toUpperCase();
 
         //if any char's in the String is not h or t returns false
         for(int i = 0; i < choice.length(); i++)
@@ -338,7 +339,10 @@ public class Frame extends javax.swing.JFrame
             }
         }
         
-        return true;
+        if (Integer.parseInt(num) > 0)
+            return true;
+        else
+            return false;
     }
     
     /**
